@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class MyApp extends StatefulWidget {
+  MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  int value = 0;
 
   // This widget is the root of your application.
   @override
@@ -31,7 +38,52 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.amber[300],
+          title: Text(
+            "Lets flutter desktop",
+            // style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Colors.black),
+            style: TextStyle(
+                fontSize: 30.0,
+                color: Colors.black,
+                fontWeight: FontWeight.w300),
+          ),
+          centerTitle: true,
+          // floatingActionButton: Column(mainAxisAlignment: MainAxisAlignment.end, children: [
+
+          // ],)
+        ),
+        body: Center(
+          child: Text(
+            value.toString(),
+            style: TextStyle(fontSize: 24.0),
+          ),
+        ),
+        //  floatingActionButton: FloatingActionButton(onPressed: () {}, child: Icon(Icons.add),),
+        floatingActionButton: Container(
+            height: 200,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                FloatingActionButton(
+                  onPressed: () {
+                    value += 1;
+                    setState(() {});
+                  },
+                  child: Icon(Icons.add),
+                ),
+                FloatingActionButton(
+                  onPressed: () {
+                    value -= 1;
+                    setState(() {});
+                  },
+                  child: Icon(Icons.remove),
+                ),
+              ],
+            )),
+      ),
     );
   }
 }
